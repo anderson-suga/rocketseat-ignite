@@ -9,3 +9,11 @@ yarn init -y
 ```
 yarn add express
 ```
+
+# Instalar o nodemon
+
+Faz o reload depois de fazer alguma alteração na aplicação automaticamente
+
+```
+yarn add nodemon -D
+```
