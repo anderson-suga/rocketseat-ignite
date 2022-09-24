@@ -1,13 +1,17 @@
+import "reflect-metadata";
+import { container } from "tsyringe";
 import { Request, Response } from "express";
 import { CreateSpecificationUseCase } from "./CreateSpecificationUseCase";
 
 class CreateSpecificationController {
-  constructor(private createSpecificationUseCase: CreateSpecificationUseCase) {}
-
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
 
-    this.createSpecificationUseCase.execute({ description, name });
+    const createSpecificationUseCase = container.resolve(
+      CreateSpecificationUseCase
+    );
+
+    await createSpecificationUseCase.execute({ description, name });
 
     return response.status(201).send();
   }
