@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { dataSource } from "../../../../database";
+import { AppDataSource } from "../../../../database/dataSource";
 import { Category } from "../../entities/Category";
 import {
   ICategoriesRepository,
@@ -9,17 +9,8 @@ import {
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
-  private static INSTANCE: CategoriesRepository;
-
-  private constructor() {
-    this.repository = dataSource.getRepository(Category);
-  }
-
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-    return CategoriesRepository.INSTANCE;
+  constructor() {
+    this.repository = AppDataSource.getRepository(Category);
   }
 
   async create({ description, name }: ICreateCategoryDTO): Promise<void> {
@@ -36,7 +27,7 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string): Promise<Category> {
-    const category = await this.repository.findOneBy({ name });
+    const category = await this.repository.findOne({ where: { name } });
     return category;
   }
 }
