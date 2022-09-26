@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppError";
 
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
 
@@ -21,7 +22,7 @@ class CreateCategoryUseCase {
     );
 
     if (categoryAlredyExists) {
-      throw new Error("Category already exists");
+      throw new AppError("Category already exists");
     }
 
     this.categoriesRepository.create({ name, description });
