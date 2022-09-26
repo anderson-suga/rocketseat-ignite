@@ -4,11 +4,12 @@ import multer from "multer";
 import { CreateUserController } from "../modules/accounts/useCases/createUser/CreateUserController";
 import { UpdateUserAvatarController } from "../modules/accounts/useCases/updateUserAvatar/UpdateUSerAvatarController";
 
+import uploadConfig from "../config/upload";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
+
 const usersRoutes = Router();
 
-const upload = multer({
-  dest: "./avatar",
-});
+const upload = multer(uploadConfig.upload("./tmp/avatar"));
 
 const createUserController = new CreateUserController();
 
@@ -18,7 +19,8 @@ usersRoutes.post("/", createUserController.handle);
 
 usersRoutes.patch(
   "/avatar",
-  upload.single("file"),
+  ensureAuthenticated,
+  upload.single("avatar"),
   updateUserAvatarController.handle
 );
 
