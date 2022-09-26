@@ -1,9 +1,9 @@
 import { constructor } from "tsyringe/dist/typings/types";
 import { Repository } from "typeorm";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { AppDataSource } from "../../../../database/dataSource";
-import { User } from "../../entities/Users";
-import { IUsersRepository } from "../IUsersRepository";
+import { ICreateUserDTO } from "../../../dtos/ICreateUserDTO";
+import { AppDataSource } from "../../../../../shared/infra/typeorm/dataSource";
+import { User } from "../entities/Users";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   private repository: Repository<User>;

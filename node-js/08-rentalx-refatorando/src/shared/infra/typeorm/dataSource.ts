@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
-import { Category } from "../modules/cars/entities/Category";
-import { Specification } from "../modules/cars/entities/Specifications";
-import { User } from "../modules/accounts/entities/Users";
+import { Category } from "../../../modules/cars/infra/typeorm/entities/Category";
+import { Specification } from "../../../modules/cars/infra/typeorm/entities/Specifications";
+import { User } from "../../../modules/accounts/infra/typeorm/entities/Users";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
