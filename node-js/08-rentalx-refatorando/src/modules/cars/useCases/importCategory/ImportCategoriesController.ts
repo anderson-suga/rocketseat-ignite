@@ -1,0 +1,19 @@
+import "reflect-metadata";
+import { container } from "tsyringe";
+
+import { Request, Response } from "express";
+import { ImportCategoriesUseCase } from "./ImportCategoriesUseCase";
+
+class ImportCategoriesController {
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { file } = request;
+
+    const importCategoriesUseCase = container.resolve(ImportCategoriesUseCase);
+
+    await importCategoriesUseCase.execute(file);
+
+    return response.send();
+  }
+}
+
+export { ImportCategoriesController };
