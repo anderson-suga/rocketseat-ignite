@@ -24,8 +24,19 @@ export const AppDataSource = new DataSource({
   subscribers: [],
 });
 
+/*
 export function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
+}
+*/
+export function createConnection(host = "database"): Promise<DataSource> {
+  return AppDataSource.setOptions({
+    host: process.env.NODE_ENV === "test" ? "localhost" : host,
+    database:
+      process.env.NODE_ENV === "test"
+        ? "rentx_test"
+        : (AppDataSource.options.database as string),
+  }).initialize();
 }
 
 export function createSeedAdmin(
