@@ -29,6 +29,13 @@ export function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
 }
 */
+
+export function createConnection(
+  host = process.env.NODE_ENV === "test" ? "localhost" : "database"
+): Promise<DataSource> {
+  return AppDataSource.setOptions({ host }).initialize();
+}
+/*
 export function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({
     host: process.env.NODE_ENV === "test" ? "localhost" : host,
@@ -38,6 +45,7 @@ export function createConnection(host = "database"): Promise<DataSource> {
         : (AppDataSource.options.database as string),
   }).initialize();
 }
+*/
 
 export function createSeedAdmin(
   host = process.env.NODE_ENV === "test" ? "localhost" : "database"
