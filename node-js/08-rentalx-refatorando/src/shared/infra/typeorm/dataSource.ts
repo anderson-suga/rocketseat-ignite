@@ -5,9 +5,10 @@ import { Category } from "../../../modules/cars/infra/typeorm/entities/Category"
 import { Specification } from "../../../modules/cars/infra/typeorm/entities/Specifications";
 import { User } from "../../../modules/accounts/infra/typeorm/entities/Users";
 import { Car } from "../../../modules/cars/infra/typeorm/entities/Cars";
-import { CarImage } from "../../../modules/cars/infra/typeorm/entities/CarIMage";
+import { CarImage } from "../../../modules/cars/infra/typeorm/entities/CarImage";
+import { Rental } from "../../../modules/rentals/infra/typeorm/entities/Rental";
 
-const listEntities = [Category, Specification, User, Car, CarImage];
+const listEntities = [Category, Specification, User, Car, CarImage, Rental];
 
 export const AppDataSource = new DataSource({
   type: "postgres",
