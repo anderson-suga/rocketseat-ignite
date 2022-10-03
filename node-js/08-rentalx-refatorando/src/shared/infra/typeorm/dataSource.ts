@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
   port: 5432,
   username: "docker",
   password: "ignite",
-  database: "rentx",
+  database: process.env.NODE_ENV === "test" ? "rentx_test" : "rentx",
   synchronize: false,
   logging: false,
   entities: listEntities,
@@ -28,7 +28,9 @@ export function createConnection(host = "database"): Promise<DataSource> {
   return AppDataSource.setOptions({ host }).initialize();
 }
 
-export function createSeedAdmin(host = "database"): DataSource {
+export function createSeedAdmin(
+  host = process.env.NODE_ENV === "test" ? "localhost" : "database"
+): DataSource {
   const dataSource = new DataSource({
     type: "postgres",
     host: "localhost",

@@ -1,7 +1,7 @@
 import { ICarsImagesRepository } from "@modules/cars/repositories/ICarImagesRepository";
 import { Repository } from "typeorm";
 import { AppDataSource } from "@shared/infra/typeorm/dataSource";
-import { CarImage } from "../entities/CarIMage";
+import { CarImage } from "../entities/CarImage";
 
 class CarImagesRepository implements ICarsImagesRepository {
   private repository: Repository<CarImage>;
